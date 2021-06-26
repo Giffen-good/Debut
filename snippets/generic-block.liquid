@@ -1,0 +1,40 @@
+<div class="generic-block block-size-{{ block_size }}">
+ {% if image != blank or video_url != blank %}
+    {% if caption_text %}
+      <div class="caption">
+        {%  if link != blank %}
+          <a href="{{ link }}" rel="noopener noreferrer">
+        {% endif %}
+            <h2 class="dib">{{ caption_text }} {%  if link != blank %}<img src='{{ "arrow-right.svg" | asset_url }}' alt="arrow-right" />{% endif %}</h2>
+        {%  if link != blank %}
+          </a>
+        {% endif %}
+      </div>
+    {% endif %}
+    {% render 'video-or-image-with-text-overlay',
+      link: link,
+      bg_color: bg_color,
+      text_color: text_color,
+      highlighter_text: highlighter_text,
+      image: image,
+      video_url: video_url,
+      vertical_text_alignment: vertical_text_alignment,
+      horizontal_text_alignment: horizontal_text_alignment
+    %}    
+        
+{% comment %} 
+    PARAMS:
+      - link
+      - bg_color
+      - text_color
+      - highlighter_text
+      - image
+      - video_url
+ {% endcomment %}
+  {% else %} {% comment %} TEXT EL - NO img/video {% endcomment %}
+    {% if highlighter_text != blank %}
+      <h2 class="ha--{{ horizontal_text_alignment }} di" style="background-color:{{ bg_color }};color: {{text_color}}">{{ highlighter_text }}</h2>
+    {% endif %}
+   {% render 'cta', link: link, text: cta %}
+  {% endif %}
+</div>

@@ -1,0 +1,134 @@
+<div style="height:300px" class="marquee x  {% if section.settings.section_margin %} section-margin {% endif %} max-width--flush">
+  {% for block in section.blocks %}
+      {% if block.settings.link != blank %}
+        <a class="marquee-item" href="{{ block.settings.link }}">
+      {% else %}
+        <div class="marquee-item">
+      {% endif %}
+              
+              {% if block.type == 'marquee-image' %}
+              <figure class="psr" style='--aspect-ratio: {{ block.settings.image.aspect_ratio }}'>
+                {% render 'responsive-image', image:block.settings.image, custom_classes:"psa h100" %}
+              </figure>
+              {% endif %}
+              {% if block.type == 'marquee-text' %}
+                <div>
+                  <h6 style="{% unless block.settings.bg_color == 'rgba(0,0,0,0)' %}background-color: {{ block.settings.bg_color }};{% endunless %}{% unless block.settings.text_color == 'rgba(0,0,0,0)' %}color: {{ block.settings.text_color }}{% endunless %}">
+                    {{ block.settings.highlighter_text }}
+                  </h6>
+                </div>
+              {% endif %}
+
+      {% if block.settings.link != blank %}
+        </a>
+      {% else %}
+        </div>
+      {% endif %}
+  {% endfor %}
+</div>
+
+
+
+{% schema %}
+  {
+    "name": "marquee",
+    "class": "generic-content marquee-section",
+    "tag": "section",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "section_margin",
+        "label": "Section Margin",
+        "info": "Toggle to enable/disable the margin between this section and the one following it.",
+        "default": true
+      },
+      {
+        "type": "radio",
+        "id": "marquee-spacing",
+        "label": "Text",
+        "options": [
+          { "value": "more-space", "label": "Lots of Space Around" },
+          { "value": "no-space", "label": "Tight Space Around" }
+        ],
+        "default":   "more-space"
+      }
+    ],
+    "blocks":[
+      {
+        "type": "marquee-text",
+        "name": "Marquee Text",
+        "settings":[
+          {
+            "type":      "color",
+            "id":        "bg_color",
+            "label":     "BG / Highlighter Color",
+            "default":   "#000000"
+          },
+          {
+            "type":      "color",
+            "id":        "text_color",
+            "label":     "Text Color",
+            "default":   "#fff",
+            "info":      "Select text color"
+          },
+          {
+            "type": "textarea",
+            "id": "highlighter_text",
+            "label": "Highlighter Text",
+            "default": "Highlighter Text",
+            "placeholder": "text"
+          },
+          {
+            "id": "link",
+            "type": "url",
+            "label": "Section Link"
+          }
+        ]
+      },
+      {
+        "type": "marquee-image",
+        "name": "Marquee Image",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": {
+              "cs": "Obrázek",
+              "da": "Billede",
+              "de": "Foto",
+              "en": "Image",
+              "es": "Imagen",
+              "fi": "Kuva",
+              "fr": "Image",
+              "it": "Immagine",
+              "ja": "画像",
+              "ko": "이미지",
+              "nb": "Bilde",
+              "nl": "Afbeelding",
+              "pl": "Obraz",
+              "pt-BR": "Imagem",
+              "pt-PT": "Imagem",
+              "sv": "Bild",
+              "th": "รูปภาพ",
+              "tr": "Görsel",
+              "vi": "Hình ảnh",
+              "zh-CN": "图片",
+              "zh-TW": "圖片"
+            }
+          },
+          {
+            "id": "link",
+            "type": "url",
+            "label": "Item Link"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Marquee",
+        "category": "Specialized Content"
+      }
+    ]
+  }
+{% endschema %}

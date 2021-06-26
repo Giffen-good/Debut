@@ -1,0 +1,27 @@
+{% comment %} 
+    PARAMS:
+      - link
+      - bg_color
+      - text_color
+      - highlighter_text
+      - image
+      - video_url
+      - vertical_text_alignment
+      - horizontal_text_alignment
+ {% endcomment %}
+{%  if link != blank %}
+    <a class="image-container psr db" href="{{ link }}" rel="noopener noreferrer">
+{% else %}
+    <div class="image-container psr">
+{% endif %}
+        {% render 'video-or-image', video_url:video_url, image:image  %}
+        {% if highlighter_text != blank %}
+            <div class="psa va--{{ vertical_text_alignment }} ha--{{ horizontal_text_alignment }}">
+            {% render 'highlighter-text', bg_color: bg_color, text_color:text_color, highlighter_text: highlighter_text %}
+            </div>
+        {% endif %}
+{%  if link != blank %}
+    </a>
+{% else %}
+    </div>
+{% endif %}

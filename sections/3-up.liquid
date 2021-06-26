@@ -1,0 +1,158 @@
+<div class="three-up-section {% if section.settings.section_margin %} section-margin {% endif %}  max-width--flush">
+  {% for block in section.blocks %}
+      {% render 'generic-block',
+      block_size: block.settings.block_size,
+      image: block.settings.image,
+      video_url: block.settings.video_url
+      caption_text: block.settings.caption_text,
+      link: block.settings.link,
+      bg_color:block.settings.bg_color,
+      highlighter_text: block.settings.highlighter_text,
+      horizontal_text_alignment: block.settings.horizontal_text_alignment,
+      vertical_text_alignment: block.settings.vertical_text_alignment,
+      cta: block.settings.cta,
+      text_color: block.settings.text_color
+  %}
+  {% endfor %}
+</div>
+
+
+
+{% schema %}
+  {
+    "name": "3UP",
+    "class": "generic-content three-up-section",
+    "tag": "section",
+    "max_blocks": 3,
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "section_margin",
+        "label": "Section Margin",
+        "info": "Toggle to enable/disable the margin between this section and the one following it.",
+        "default": true
+      }
+    ],
+    "blocks": [
+      {
+        "type": "generic-content",
+        "name": "Content Block",
+        "settings": [
+          {
+            "type":      "color",
+            "id":        "bg_color",
+            "label":     "BG / Highlighter Color",
+            "default":   "#000000"
+          },
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": {
+              "cs": "Obrázek",
+              "da": "Billede",
+              "de": "Foto",
+              "en": "Image",
+              "es": "Imagen",
+              "fi": "Kuva",
+              "fr": "Image",
+              "it": "Immagine",
+              "ja": "画像",
+              "ko": "이미지",
+              "nb": "Bilde",
+              "nl": "Afbeelding",
+              "pl": "Obraz",
+              "pt-BR": "Imagem",
+              "pt-PT": "Imagem",
+              "sv": "Bild",
+              "th": "รูปภาพ",
+              "tr": "Görsel",
+              "vi": "Hình ảnh",
+              "zh-CN": "图片",
+              "zh-TW": "圖片"
+            }
+          },
+          {
+            "id": "video_url",
+            "type": "text",
+            "label": "Video URL",
+            "info": "Insert self-hosted video URL here",
+            "placeholder": "text"
+          }, 
+          {
+            "type":      "color",
+            "id":        "text_color",
+            "label":     "Text Color",
+            "default":   "#fff",
+            "info":      "Select text color"
+          },
+          {
+            "type": "select",
+            "id": "vertical_text_alignment",
+            "options": [
+              { "value": "top", "label": "Top"},
+              { "value": "middle", "label": "Middle"},
+              { "value": "bottom", "label": "Bottom"}
+            ],
+            "label": "Vertical Text Alignment"
+          },
+          {
+            "type": "select",
+            "id": "horizontal_text_alignment",
+            "options": [
+              { "value": "left", "label": "Left-aligned"},
+              { "value": "center", "label": "Centered"},
+              { "value": "right", "label": "Right-aligned"}
+            ],
+            "label": "Horizontal Text alignment"
+          },
+          {
+            "type": "textarea",
+            "id": "highlighter_text",
+            "label": "Highlighter Text",
+            "default": "Highlighter Text",
+            "placeholder": "text"
+          },
+          {
+            "type": "text",
+            "id": "caption_text",
+            "label": "Caption Text",
+            "default": "Caption Text",
+            "info": "If image/video is specfied",
+            "placeholder": "text"
+          },
+          {
+            "type": "text",
+            "id": "cta",
+            "label": "CTA (if no image)",
+            "default": "Read More",
+            "info": "Renders if no image/video is specified",
+            "placeholder": "text"
+          },
+          {
+            "id": "link",
+            "type": "url",
+            "label": "Section Link"
+          },
+          {
+            "type": "radio",
+            "id": "block_size",
+            "label": "Block Size",
+            "options": [
+              { "value": "small", "label": "Small" },
+              { "value": "medium", "label": "Medium" },
+              { "value": "large", "label": "Large" }
+            ],
+            "default": "medium",
+            "info": "text"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "3UP",
+        "category": "Generic Content"
+      }
+    ]
+  }
+{% endschema %}

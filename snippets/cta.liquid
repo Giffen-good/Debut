@@ -1,0 +1,7 @@
+ {%  if link != blank and text != blank %}
+    <a class="cta-link" href="{{ link }}" rel="noopener noreferrer">
+{% endif %}
+    <h3 class="cta">{{ text }} {%  if link != blank %}<img src='{{ "arrow-right.svg" | asset_url }}'  alt="right-arrow" />{% endif %}</h3>
+{%  if link != blank %}
+    </a>
+{% endif %}

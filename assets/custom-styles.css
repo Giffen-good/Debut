@@ -241,3 +241,10 @@ display:none;
     display: block;
     color: red;
 }
+  
+ .image-container {
+     min-height:500px;
+ }
+ .ofc {
+     object-fit:cover;
+ }
